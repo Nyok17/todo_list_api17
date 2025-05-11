@@ -25,12 +25,12 @@ A simple todo list api which enable users to register, login and manage their to
 
 1. Clone the Repo:
    ```bash
-   git clone
+   git clone https://github.com/Nyok17/todo_list_api17.git
    ```
 
 2. Roadmap project url:
    ```bash
-
+   https://roadmap.sh/projects/todo-list-api
    ```
 3. Install dependencies:
 
