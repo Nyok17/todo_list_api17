@@ -1,0 +1,22 @@
+deploy:
+  needs: test
+  runs-on: ubuntu-latest
+  if: success()
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}
+
+    - name: Deploy to AWS EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-public-ip << 'EOF'
+          cd /path/to/your/app
+          git pull origin main
+          source venv/bin/activate
+          pip install -r requirements.txt
+          sudo systemctl restart gunicorn  # If you're using Gunicorn to serve the app
+        EOF
